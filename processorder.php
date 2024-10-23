@@ -2,9 +2,9 @@
 require_once("file_exceptions.php"); // Ensure the file exists in the right location
 
 // Create short variable names from POST data
-$tireqty = (int) $_POST['tireqty'];                                           
-$oilqty = (int) $_POST['oilqty'];                                             
-$sparkqty = (int) $_POST['sparkqty'];                                         
+$Jewleryqty = (int) $_POST['Jewleryqty'];                                           
+$Shoesqty = (int) $_POST['Shoesqty'];                                             
+$Clothesqty = (int) $_POST['Clothesqty'];                                         
 $address = preg_replace('/\t|\R/', ' ', $_POST['address']);                     
 $date = date('H:i, jS F Y'); 
 
@@ -23,29 +23,29 @@ $date = date('H:i, jS F Y');
         echo "<p>Your order is as follows: </p>";
 
         // Calculate totals
-        $totalqty = $tireqty + $oilqty + $sparkqty;
+        $totalqty = $Jewleryqty + $Shoesqty + $Clothesqty;
         echo "<p>Items ordered: ".$totalqty."<br />";
 
         if ($totalqty == 0) {
             echo "You did not order anything on the previous page!<br />";
         } else {
-            if ($tireqty > 0) {
-                echo htmlspecialchars($tireqty).' tires<br />';
+            if ($Jewleryqty > 0) {
+                echo htmlspecialchars($Jewleryqty).' Jewlery<br />';
             }
-            if ($oilqty > 0) {
-                echo htmlspecialchars($oilqty).' bottles of oil<br />';
+            if ($Shoesqty > 0) {
+                echo htmlspecialchars($Shoesqty).' Shoes<br />';
             }
-            if ($sparkqty > 0) {
-                echo htmlspecialchars($sparkqty).' spark plugs<br />';
+            if ($Clothesqty > 0) {
+                echo htmlspecialchars($Clothesqty).' Clothes<br />';
             }
         }
 
         // Define prices and calculate total amount
-        define('TIREPRICE', 100);
-        define('OILPRICE', 10);
-        define('SPARKPRICE', 4);
+        define('JEWLERYPRICE', 100);
+        define('SHOESPRICE', 10);
+        define('CLOTHESPRICE', 4);
 
-        $totalamount = $tireqty * TIREPRICE + $oilqty * OILPRICE + $sparkqty * SPARKPRICE;
+        $totalamount = $Jewleryqty * JEWLERYPRICE + $Shoesqty * SHOESPRICE + $Clothesqty * CLOTHESPRICE;
         echo "Subtotal: $".number_format($totalamount, 2)."<br />";
 
         // Calculate total with tax
@@ -56,8 +56,8 @@ $date = date('H:i, jS F Y');
         echo "<p>Address to ship to is ".htmlspecialchars($address)."</p>";
 
         // Prepare output string for order logging
-        $outputstring = $date."\t".$tireqty." tires \t".$oilqty." oil\t"
-                        .$sparkqty." spark plugs\t\$".$totalamount
+        $outputstring = $date."\t".$Jewleryqty." Jewlery \t".$Shoesqty." Shoes\t"
+                        .$Clothesqty." Clothes\t\$".$totalamount
                         ."\t". $address."\n";
 
         // Try to open the file and log the order
